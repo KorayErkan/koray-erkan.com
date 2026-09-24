@@ -1,0 +1,55 @@
+{
+  "folders": [
+    { "path": "." }
+  ],
+  "settings": {
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "files.exclude": {
+      "public": true,
+      "resources": true,
+      ".hugo_build.lock": true
+    },
+    "search.exclude": {
+      "public": true,
+      "resources": true
+    },
+    "[markdown]": {
+      "editor.wordWrap": "on"
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "budparr.language-hugo-vscode",
+      "tamasfe.even-better-toml",
+      "yzhang.markdown-all-in-one"
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Preview site (with drafts)",
+        "type": "shell",
+        "command": "hugo server -D --navigateToChanged",
+        "isBackground": true,
+        "problemMatcher": [],
+        "group": { "kind": "build", "isDefault": true }
+      },
+      {
+        "label": "New blog post",
+        "type": "shell",
+        "command": "hugo new content blog/${input:slug}.md",
+        "problemMatcher": []
+      }
+    ],
+    "inputs": [
+      {
+        "id": "slug",
+        "type": "promptString",
+        "description": "Post file name, lowercase with dashes (e.g. my-first-post)"
+      }
+    ]
+  }
+}
