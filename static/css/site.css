@@ -1,0 +1,19 @@
+:root { --fg: #1d1d1f; --muted: #6b6b70; --bg: #fdfdfb; --accent: #1f5fa8; }
+@media (prefers-color-scheme: dark) {
+  :root { --fg: #e8e8e6; --muted: #9a9aa0; --bg: #16171a; --accent: #7fb0ea; }
+}
+* { box-sizing: border-box; }
+body { margin: 0 auto; max-width: 42rem; padding: 0 1rem; background: var(--bg); color: var(--fg);
+       font: 1.0625rem/1.65 Georgia, "Times New Roman", serif; }
+header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline;
+         gap: .5rem; padding: 1.5rem 0; border-bottom: 1px solid var(--muted); }
+header, footer, nav, time, .meta { font-family: system-ui, sans-serif; }
+.brand { font-weight: 700; color: var(--fg); text-decoration: none; }
+nav a { margin-left: 1rem; }
+a { color: var(--accent); }
+main { padding: 1.5rem 0 3rem; }
+.posts { list-style: none; padding: 0; }
+.posts li { margin: .4rem 0; }
+time, .meta { color: var(--muted); font-size: .9rem; }
+pre { overflow-x: auto; padding: .75rem; background: rgba(127,127,127,.12); }
+footer { padding: 1.5rem 0; border-top: 1px solid var(--muted); color: var(--muted); font-size: .9rem; }

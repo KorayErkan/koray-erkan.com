@@ -1,0 +1,7 @@
+{{ define "main" }}
+  <article>
+    <h1>{{ .Title }}</h1>
+    {{ if eq .Section "blog" }}<p class="meta"><time>{{ .Date.Format "2 January 2006" }}</time></p>{{ end }}
+    {{ .Content }}
+  </article>
+{{ end }}
