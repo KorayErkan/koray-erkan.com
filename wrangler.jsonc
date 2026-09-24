@@ -2,6 +2,8 @@
 {
   "name": "koray-erkan",
   "compatibility_date": "2026-09-24",
+  // Required (even empty) for per-branch/PR previews via `wrangler preview`.
+  "previews": {},
   "assets": {
     "directory": "./public",
     "not_found_handling": "404-page"
