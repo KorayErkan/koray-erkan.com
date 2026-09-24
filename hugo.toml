@@ -1,6 +1,7 @@
 baseURL = 'https://koray-erkan.com/'
 locale = 'en-us'
 title = 'Koray Erkan'
+disableKinds = ['taxonomy', 'term']
 
 [params]
   description = 'Documentation engineer and technical writer.'
