@@ -4,8 +4,11 @@ title = 'Koray Erkan'
 disableKinds = ['taxonomy', 'term']
 
 [params]
-  description = 'Documentation engineer and technical writer.'
+  description = 'Koray Erkan, documentation engineer: documentation systems, docs-as-code, and AI-assisted authoring that stays grounded in the source.'
   email = 'contact@koray-erkan.com'
+  linkedin = 'https://www.linkedin.com/in/korayerkan/'
+  github = 'https://github.com/KorayErkan'
+  repo = 'https://github.com/KorayErkan/koray-erkan.com'
 
 [menus]
   [[menus.main]]

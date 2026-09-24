@@ -1,7 +1,7 @@
 {{ define "main" }}
-  <article>
+  <article class="doc">
     <h1>{{ .Title }}</h1>
-    {{ if eq .Section "blog" }}<p class="meta"><time>{{ .Date.Format "2 January 2006" }}</time></p>{{ end }}
+    {{ if eq .Section "blog" }}<p class="meta"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time></p>{{ end }}
     {{ .Content }}
   </article>
 {{ end }}

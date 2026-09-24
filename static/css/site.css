@@ -1,19 +1,130 @@
-:root { --fg: #1d1d1f; --muted: #6b6b70; --bg: #fdfdfb; --accent: #1f5fa8; }
-@media (prefers-color-scheme: dark) {
-  :root { --fg: #e8e8e6; --muted: #9a9aa0; --bg: #16171a; --accent: #7fb0ea; }
+/* koray-erkan.com — "technical manual" layout: headings sit in the left margin
+   (side heads) on wide screens and fold back above the text on narrow ones. */
+
+:root {
+  --paper: #f7f8fa;
+  --ink: #1a2330;
+  --muted: #5a6573;
+  --rule: #d8dde4;
+  --accent: #0b5394;
+  --accent-soft: #e3ecf6;
+
+  --sans: "Public Sans", system-ui, sans-serif;
+  --serif: "Literata", Georgia, serif;
+
+  --measure: 36rem;   /* text column, ~70 characters */
+  --margin: 11rem;    /* side-head column */
+  --gap: 2.5rem;
 }
+:root[data-theme="dark"] { color-scheme: dark; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #12171e;
+    --ink: #e2e7ee;
+    --muted: #97a3b2;
+    --rule: #2c3540;
+    --accent: #83b6ee;
+    --accent-soft: #1b2939;
+    color-scheme: dark;
+  }
+}
+
 * { box-sizing: border-box; }
-body { margin: 0 auto; max-width: 42rem; padding: 0 1rem; background: var(--bg); color: var(--fg);
-       font: 1.0625rem/1.65 Georgia, "Times New Roman", serif; }
-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline;
-         gap: .5rem; padding: 1.5rem 0; border-bottom: 1px solid var(--muted); }
-header, footer, nav, time, .meta { font-family: system-ui, sans-serif; }
-.brand { font-weight: 700; color: var(--fg); text-decoration: none; }
-nav a { margin-left: 1rem; }
-a { color: var(--accent); }
-main { padding: 1.5rem 0 3rem; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 1.0625rem/1.7 var(--serif);
+  font-optical-sizing: auto;
+}
+
+/* Page frame: margin column + text column, left-aligned like a manual page. */
+.masthead, .page, .colophon {
+  max-width: calc(var(--margin) + var(--gap) + var(--measure));
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+@media (min-width: 60rem) {
+  .masthead, .page, .colophon {
+    max-width: calc(var(--margin) + var(--gap) + var(--measure) + 4rem);
+    padding: 0 2rem;
+  }
+}
+
+a { color: var(--accent); text-underline-offset: .18em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+.skip { position: absolute; left: -999px; }
+.skip:focus { left: 1rem; top: 1rem; background: var(--paper); padding: .5rem 1rem; z-index: 1; }
+
+/* Masthead */
+.masthead {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: .5rem 1.5rem;
+  padding-top: 1.75rem; padding-bottom: 1.75rem;
+  font-family: var(--sans);
+}
+.brand { font-weight: 800; color: var(--ink); text-decoration: none; letter-spacing: -.01em; }
+nav { display: flex; gap: 1.25rem; }
+nav a { color: var(--muted); text-decoration: none; font-size: .95rem; }
+nav a:hover, nav a[aria-current="page"] { color: var(--ink); }
+nav a[aria-current="page"] { box-shadow: inset 0 -2px var(--accent); }
+
+/* Headings */
+h1, h2, h3 { font-family: var(--sans); line-height: 1.2; color: var(--ink); }
+h1 { font-size: 2.25rem; font-weight: 800; letter-spacing: -.02em; margin: 0 0 1rem; }
+h2 { font-size: 1rem; font-weight: 600; margin: 3rem 0 .75rem; color: var(--accent); }
+h3 { font-size: 1.125rem; font-weight: 600; margin: 1.75rem 0 .25rem; }
+h3 + p { margin-top: 0; }
+p, ul, ol { margin: 0 0 1rem; }
+
+/* Hero: the name large, set flush with the text column. */
+.hero { padding: 3rem 0 2rem; border-top: 1px solid var(--rule); }
+.hero h1 { font-size: clamp(2.5rem, 7vw, 4.25rem); line-height: 1; letter-spacing: -.035em; margin: 0 0 1.25rem; }
+.lede { font-size: 1.3rem; line-height: 1.5; max-width: 32rem; margin: 0; }
+
+/* Side heads: on wide screens the text column is indented and each h2 is
+   floated into the margin. A float starts level with the text beside it, so
+   the gap between sections goes on whatever comes *before* the h2. */
+@media (min-width: 60rem) {
+  .hero, .doc { padding-left: calc(var(--margin) + var(--gap)); }
+  .doc > h2 {
+    float: left; clear: left;
+    width: var(--margin);
+    margin: .3rem 0 0 calc(-1 * (var(--margin) + var(--gap)));
+    text-align: right;
+  }
+  .doc > h2 + * { margin-top: 0; }
+  .doc > :has(+ h2) { margin-bottom: 3rem; }
+}
+.doc { max-width: calc(var(--margin) + var(--gap) + var(--measure)); padding-bottom: 3rem; }
+.doc > h1 { margin-top: 2.5rem; }
+
+/* Lists of posts */
 .posts { list-style: none; padding: 0; }
-.posts li { margin: .4rem 0; }
-time, .meta { color: var(--muted); font-size: .9rem; }
-pre { overflow-x: auto; padding: .75rem; background: rgba(127,127,127,.12); }
-footer { padding: 1.5rem 0; border-top: 1px solid var(--muted); color: var(--muted); font-size: .9rem; }
+.posts li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 1rem;
+            padding: .6rem 0; border-bottom: 1px solid var(--rule); }
+.posts li:first-child { border-top: 1px solid var(--rule); }
+time, .meta { font-family: var(--sans); color: var(--muted); font-size: .875rem; }
+
+/* Prose details */
+ul { padding-left: 1.2rem; }
+li { margin: .25rem 0; }
+code { font-size: .9em; background: var(--accent-soft); padding: .1em .3em; border-radius: 3px; }
+pre { overflow-x: auto; padding: 1rem; background: var(--accent-soft); border-radius: 4px; line-height: 1.5; }
+pre code { background: none; padding: 0; }
+blockquote { margin: 1.5rem 0; padding-left: 1rem; border-left: 3px solid var(--accent); color: var(--muted); }
+
+/* Colophon */
+.colophon { font-family: var(--sans); font-size: .9rem; color: var(--muted);
+            padding-top: 1.5rem; padding-bottom: 3rem; }
+.colophon p:first-child { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem;
+                          padding-top: 1.5rem; border-top: 1px solid var(--rule); }
+.small { font-size: .8rem; }
+
+@media (max-width: 30rem) {
+  body { font-size: 1rem; }
+  .lede { font-size: 1.15rem; }
+}
