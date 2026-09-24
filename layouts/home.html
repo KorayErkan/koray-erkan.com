@@ -1,9 +1,16 @@
 {{ define "main" }}
-  {{ .Content }}
-  {{ with first 3 (where site.RegularPages "Section" "blog") }}
-    <h2>Recent posts</h2>
-    <ul class="posts">
-      {{ range . }}<li><time>{{ .Date.Format "2006-01-02" }}</time> <a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}
-    </ul>
-  {{ end }}
+  <div class="hero">
+    <h1>{{ site.Title }}</h1>
+    <p class="lede">{{ .Params.lede | .RenderString }}</p>
+  </div>
+  <div class="doc">
+    {{ .Content }}
+    <h2 id="writing">Writing</h2>
+    {{ with first 3 (where site.RegularPages "Section" "blog") }}
+      {{ partial "post-list.html" . }}
+      <p><a href="{{ "/blog/" | relURL }}">All posts</a></p>
+    {{ else }}
+      <p>The first posts are on their way. They'll cover documentation engineering, docs-as-code, and building AI-assisted writing tools that stay grounded in the source.</p>
+    {{ end }}
+  </div>
 {{ end }}
