@@ -1,0 +1,9 @@
+// Cloudflare Workers config: serve the Hugo output (public/) as a static site.
+{
+  "name": "koray-erkan",
+  "compatibility_date": "2026-09-24",
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "404-page"
+  }
+}
