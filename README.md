@@ -1,6 +1,8 @@
 # koray-erkan.com
 
-Source for [koray-erkan.com](https://koray-erkan.com), built with [Hugo](https://gohugo.io).
+Source for [koray-erkan.com](https://koray-erkan.com), built with [Hugo](https://gohugo.io) and
+hosted on Cloudflare Workers (project `koray-erkan`; fallback URL
+https://koray-erkan.koray-erkan.workers.dev).
 
 ## Everyday use
 
